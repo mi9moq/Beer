@@ -1,6 +1,6 @@
 package com.mironov.beerapp.domain.repository
 
-import com.mironov.beerapp.domain.entiry.Beer
+import com.mironov.beerapp.domain.entity.Beer
 
 interface BeerRepository {
 

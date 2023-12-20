@@ -1,4 +1,4 @@
-package com.mironov.beerapp.domain.entiry
+package com.mironov.beerapp.domain.entity
 
 data class Beer(
     val id: Long,
