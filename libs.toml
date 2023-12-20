@@ -1,0 +1,34 @@
+[versions]
+kotlin-version = "1.9.0"
+coin-version = "3.5.3"
+retrofit-version = "2.9.0"
+interceptor-version = "4.11.0"
+junit-version = "5.9.2"
+mokito-kotlin-version = "4.1.0"
+mokito-junit-version = "5.3.0"
+arch-core-testing-version = "2.2.0"
+coroutines-test-version = "1.7.0"
+
+[libraries]
+kotlin-android-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "kotlin-version" }
+
+koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "coin-version" }
+koin = { group = "io.insert-koin", name = "koin-core", version.ref = "coin-version" }
+koin-test = { group = "io.insert-koin", name = "koin-test", version.ref = "coin-version" }
+
+squareup-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit-version" }
+squareup-retrofit-converter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit-version" }
+okhttp-loggin-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "interceptor-version" }
+
+junit-api = { group = "org.junit.jupiter", name = "junit-jupiter-api", version.ref = "junit-version" }
+junit-params = { group = "org.junit.jupiter", name = "junit-jupiter-params", version.ref = "junit-version" }
+junit-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engine", version.ref = "junit-version" }
+mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mokito-kotlin-version" }
+mockito-junit = { group = "org.mockito", name = "mockito-junit-jupiter", version.ref = "mokito-junit-version" }
+arch-core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "arch-core-testing-version" }
+coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines-test-version" }
+
+[bundles]
+retrofit-deps = ["squareup-retrofit", "squareup-retrofit-converter", "okhttp-loggin-interceptor"]
+unit-tests-deps = ["junit-api", "junit-params", "junit-engine", "mockito-kotlin", "mockito-junit", "arch-core-testing", "coroutines-test", "koin-test"]
+coin-deps = ["koin", "koin-android"]

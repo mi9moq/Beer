@@ -11,6 +11,13 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
     }
+    dependencyResolutionManagement {
+        versionCatalogs {
+            create("libs") {
+                from(files("libs.toml"))
+            }
+        }
+    }
 }
 
 rootProject.name = "BeerApp"
