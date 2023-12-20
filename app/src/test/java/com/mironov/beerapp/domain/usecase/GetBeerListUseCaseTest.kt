@@ -17,7 +17,7 @@ class GetBeerListUseCaseTest {
     private val beerList = BeerData.beerList
 
     @Test
-    fun `invoke EXPECT list beer` = runTest {
+    fun `invoke EXPECT list beer`() = runTest {
         whenever(repository.getList()) doReturn beerList
 
         val expected = beerList
