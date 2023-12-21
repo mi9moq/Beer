@@ -9,6 +9,7 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 import org.mockito.kotlin.doReturn
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.mockito.kotlin.verify
 
 class BeerLocalDataSourceImplTest {
     private val dao: BeerDao = mock()
@@ -24,5 +25,13 @@ class BeerLocalDataSourceImplTest {
         val actual = dataSource.getList()
 
         assertEquals(expect, actual)
+    }
+
+    @Test
+    fun `set EXPECT set beers to dao`() = runTest {
+
+        dataSource.set(dbList)
+
+        verify(dao).set(dbList)
     }
 }
