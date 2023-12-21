@@ -14,13 +14,35 @@ class GetBeerListUseCaseTest {
     private val repository: BeerRepository = mock()
     private val useCase = GetBeerListUseCase(repository)
 
-    private val beerList = BeerData.beerList
+    private val beerListSuccess = BeerData.beerListSuccess
+    private val unknownError = BeerData.unknownError
+    private val connectionError = BeerData.connectionError
 
     @Test
-    fun `invoke EXPECT list beer`() = runTest {
-        whenever(repository.getList()) doReturn beerList
+    fun `invoke EXPECT success list beer`() = runTest {
+        whenever(repository.getList()) doReturn beerListSuccess
 
-        val expected = beerList
+        val expected = beerListSuccess
+        val actual = useCase()
+
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun `invoke with some error EXPECT error type UNKNOWN`() = runTest {
+        whenever(repository.getList()) doReturn unknownError
+
+        val expected = unknownError
+        val actual = useCase()
+
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun `invoke with connection error EXPECT error type CONNECTION`() = runTest {
+        whenever(repository.getList()) doReturn connectionError
+
+        val expected = connectionError
         val actual = useCase()
 
         assertEquals(expected, actual)
