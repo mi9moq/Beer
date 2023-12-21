@@ -7,13 +7,13 @@ import retrofit2.http.Path
 interface BeerApi {
 
     @GET("beers")
-    suspend fun getList(): Result<List<BeerDto>>
+    suspend fun getList(): List<BeerDto>
 
     @GET("beers/{id}")
     suspend fun getById(
         @Path("id") id: Long,
-    ): Result<BeerDto>
+    ): BeerDto
 
     @GET("beers/random")
-    suspend fun getRandom(): Result<BeerDto>
+    suspend fun getRandom(): BeerDto
 }
