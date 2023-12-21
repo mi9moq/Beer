@@ -36,4 +36,14 @@ class BeerRemoteDataSourceImplTest {
 
         assertEquals(expect, actual)
     }
+
+    @Test
+    fun `getRandom EXPECT beer`() = runTest {
+        whenever(api.getRandom()) doReturn dto
+
+        val expect = dto
+        val actual = dataSource.getRandom()
+
+        assertEquals(expect, actual)
+    }
 }
