@@ -37,8 +37,6 @@ class BeerRepositoryImplTest {
     fun setUp() {
         repository = BeerRepositoryImpl(
             dispatcher = dispatcher,
-            beerDao = dao,
-            beerApi = api,
             localDataSource = localDataSource,
             remoteDataSource = remoteDataSource,
             mapper = mapper,
