@@ -50,7 +50,9 @@ object BeerData {
     )
 
 
-    private val beerList = listOf(beer, beer, beer)
+    val beerList = listOf(beer, beer, beer)
+    val dbList = listOf(beerDbModel)
+    val dtoList = listOf(beerDto)
 
     val unknownError = Result.Error(errorType = ErrorType.UNKNOWN)
     val connectionError = Result.Error(errorType = ErrorType.CONNECTION)
