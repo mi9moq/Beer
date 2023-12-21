@@ -1,7 +1,7 @@
 package com.mironov.beerapp.domain.usecase
 
-import com.mironov.beerapp.domain.entity.errortype.ErrorType
-import com.mironov.beerapp.domain.entity.result.Result
+import com.mironov.beerapp.domain.entity.ErrorType
+import com.mironov.beerapp.domain.entity.Result
 import com.mironov.beerapp.domain.repository.BeerRepository
 import com.mironov.beerapp.util.BeerData
 import kotlinx.coroutines.test.runTest
@@ -30,9 +30,9 @@ class GetRandomBeerUseCaseTest {
 
     @Test
     fun `get random with some error EXPECT error type UNKNOWN`() = runTest {
-        whenever(repository.getRandom()) doReturn Result.Error(type = ErrorType.UNKNOWN)
+        whenever(repository.getRandom()) doReturn Result.Error(errorType = ErrorType.UNKNOWN)
 
-        val expected = Result.Error(type = ErrorType.UNKNOWN)
+        val expected = Result.Error(errorType = ErrorType.UNKNOWN)
         val actual = useCase()
 
         assertEquals(expected, actual)
@@ -40,9 +40,9 @@ class GetRandomBeerUseCaseTest {
 
     @Test
     fun `get random with connection error EXPECT error type CONNECTION`() = runTest {
-        whenever(repository.getRandom()) doReturn Result.Error(type = ErrorType.CONNECTION)
+        whenever(repository.getRandom()) doReturn Result.Error(errorType = ErrorType.CONNECTION)
 
-        val expected = Result.Error(type = ErrorType.CONNECTION)
+        val expected = Result.Error(errorType = ErrorType.CONNECTION)
         val actual = useCase()
 
         assertEquals(expected, actual)
