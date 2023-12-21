@@ -1,13 +1,13 @@
 package com.mironov.beerapp.data.datasource
 
-import com.mironov.beerapp.data.datasource
-import com.mironov.beerapp.data.network.BeerApi
+import com.mironov.beerapp.data.network.api.BeerApi
 import com.mironov.beerapp.util.BeerData
 import kotlinx.coroutines.test.runTest
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
-import org.junit.jupiter.api.Assertions.assertEquals
 
 class BeerRemoteDataSourceImplTest {
 
