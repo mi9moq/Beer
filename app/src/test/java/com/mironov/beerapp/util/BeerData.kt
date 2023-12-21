@@ -1,6 +1,8 @@
 package com.mironov.beerapp.util
 
 import com.mironov.beerapp.domain.entity.Beer
+import com.mironov.beerapp.data.network.model.BeerDto
+import com.mironov.beerapp.data.database.model.BeerDbModel
 import com.mironov.beerapp.domain.entity.ErrorType
 import com.mironov.beerapp.domain.entity.Result
 
