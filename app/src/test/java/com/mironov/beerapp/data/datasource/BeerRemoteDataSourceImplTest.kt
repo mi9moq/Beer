@@ -7,7 +7,7 @@ import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
-import kotlin.test.assertEquals
+import org.junit.jupiter.api.Assertions.assertEquals
 
 class BeerRemoteDataSourceImplTest {
 
@@ -15,6 +15,7 @@ class BeerRemoteDataSourceImplTest {
     private val dataSource = BeerRemoteDataSourceImpl(api)
     private val dtoList = BeerData.dtoList
     private val dto = BeerData.beerDto
+    private val id = 1L
 
     @Test
     fun `getList EXPECT beer list`() = runTest {
@@ -24,5 +25,15 @@ class BeerRemoteDataSourceImplTest {
         val actual = dataSource.getList()
 
         assertEquals(expected, actual)
+    }
+
+    @Test
+    fun `getById EXPECT beer`() = runTest {
+        whenever(api.getById(id)) doReturn dto
+
+        val expect = dto
+        val actual = dataSource.getById(id)
+
+        assertEquals(expect, actual)
     }
 }
