@@ -1,6 +1,5 @@
 package com.mironov.beerapp.data.datasource
 
-import com.mironov.beerapp.data.datasource
 import com.mironov.beerapp.data.database.BeerDao
 import com.mironov.beerapp.util.BeerData
 import kotlinx.coroutines.test.runTest
