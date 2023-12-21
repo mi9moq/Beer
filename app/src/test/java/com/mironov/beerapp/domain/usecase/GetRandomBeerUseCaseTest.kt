@@ -1,7 +1,5 @@
 package com.mironov.beerapp.domain.usecase
 
-import com.mironov.beerapp.domain.entity.ErrorType
-import com.mironov.beerapp.domain.entity.Result
 import com.mironov.beerapp.domain.repository.BeerRepository
 import com.mironov.beerapp.util.BeerData
 import kotlinx.coroutines.test.runTest
@@ -16,13 +14,15 @@ class GetRandomBeerUseCaseTest {
     private val repository: BeerRepository = mock()
     private val useCase = GetRandomBeerUseCase(repository)
 
-    private val beer = BeerData.beer
+    private val beerSuccess = BeerData.beerSuccess
+    private val unknownError = BeerData.unknownError
+    private val connectionError = BeerData.connectionError
 
     @Test
     fun `get random EXPECT success beer`() = runTest {
-        whenever(repository.getRandom()) doReturn Result.Success(beer)
+        whenever(repository.getRandom()) doReturn beerSuccess
 
-        val expected = Result.Success(beer)
+        val expected = beerSuccess
         val actual = useCase()
 
         assertEquals(expected, actual)
@@ -30,9 +30,9 @@ class GetRandomBeerUseCaseTest {
 
     @Test
     fun `get random with some error EXPECT error type UNKNOWN`() = runTest {
-        whenever(repository.getRandom()) doReturn Result.Error(errorType = ErrorType.UNKNOWN)
+        whenever(repository.getRandom()) doReturn unknownError
 
-        val expected = Result.Error(errorType = ErrorType.UNKNOWN)
+        val expected = unknownError
         val actual = useCase()
 
         assertEquals(expected, actual)
@@ -40,9 +40,9 @@ class GetRandomBeerUseCaseTest {
 
     @Test
     fun `get random with connection error EXPECT error type CONNECTION`() = runTest {
-        whenever(repository.getRandom()) doReturn Result.Error(errorType = ErrorType.CONNECTION)
+        whenever(repository.getRandom()) doReturn connectionError
 
-        val expected = Result.Error(errorType = ErrorType.CONNECTION)
+        val expected = connectionError
         val actual = useCase()
 
         assertEquals(expected, actual)

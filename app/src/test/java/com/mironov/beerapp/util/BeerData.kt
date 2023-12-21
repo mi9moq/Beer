@@ -1,12 +1,14 @@
 package com.mironov.beerapp.util
 
 import com.mironov.beerapp.domain.entity.Beer
+import com.mironov.beerapp.domain.entity.ErrorType
+import com.mironov.beerapp.domain.entity.Result
 
 object BeerData {
 
     private val foodPairing = listOf("f1", "f2", "f3")
 
-    val beer = Beer(
+    private val beer = Beer(
         id = 1L,
         name = "name",
         tagline = "tagline",
@@ -20,5 +22,11 @@ object BeerData {
         foodPairing = foodPairing,
     )
 
-    val beerList = listOf(beer, beer, beer)
+    private val beerList = listOf(beer, beer, beer)
+
+    val unknownError = Result.Error(errorType = ErrorType.UNKNOWN)
+    val connectionError = Result.Error(errorType = ErrorType.CONNECTION)
+
+    val beerSuccess = Result.Success(beer)
+    val beerListSuccess = Result.Success(beerList)
 }
