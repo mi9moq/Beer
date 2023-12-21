@@ -24,7 +24,12 @@ class BeerRepositoryImplTest {
     private val api: BeerApi = mock()
     private val mapper: BeerMapper = mock()
     private val dispatcher = StandardTestDispatcher()
-    private lateinit var repository: BeerRepositoryImpl
+    private val repository: BeerRepositoryImpl = BeerRepositoryImpl(
+        dispatcher = dispatcher,
+        localDataSource = localDataSource,
+        remoteDataSource = remoteDataSource,
+        mapper = mapper,
+    )
 
     private val beer = BeerData.beer
     private val beerDto = BeerData.beerDto
@@ -33,24 +38,25 @@ class BeerRepositoryImplTest {
     private val beerListDto = BeerData.dtoList
     private val beerListDbModel = BeerData.dbList
 
-    @Before
-    fun setUp() {
-        repository = BeerRepositoryImpl(
-            dispatcher = dispatcher,
-            localDataSource = localDataSource,
-            remoteDataSource = remoteDataSource,
-            mapper = mapper,
-        )
-    }
+//    @Before
+//    fun setUp() {
+//        repository = BeerRepositoryImpl(
+//            dispatcher = dispatcher,
+//            localDataSource = localDataSource,
+//            remoteDataSource = remoteDataSource,
+//            mapper = mapper,
+//        )
+//    }
 
     @Test
     @Suppress("ktlint:standard:max-line-length")
     fun `get EXPECT beer list`() = runTest(dispatcher) {
         whenever(remoteDataSource.getList()) doReturn beerListDto
+        whenever(localDataSource.getList()) doReturn beerListDbModel
         whenever(mapper.mapDtoToDb(beerDto)) doReturn beerDbModel
         whenever(mapper.mapDbToEntity(beerDbModel)) doReturn beer
 
-        val expected = Result.Success(beer)
+        val expected = Result.Success(beerList)
         val actual = repository.getList()
 
         assertEquals(expected, actual)

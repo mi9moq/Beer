@@ -52,7 +52,7 @@ object BeerData {
     )
 
 
-    val beerList = listOf(beer, beer, beer)
+    val beerList = listOf(beer)
     val dbList = listOf(beerDbModel)
     val dtoList = listOf(beerDto)
 

@@ -66,6 +66,7 @@ dependencies {
     implementation(libs.bundles.coin.deps)
     testImplementation(libs.bundles.unit.tests.deps)
     implementation (libs.room.runtime)
+    implementation (libs.room.ktx)
     annotationProcessor(libs.room.compiler)
     ksp(libs.room.compiler)
 }

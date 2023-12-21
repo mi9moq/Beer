@@ -30,6 +30,7 @@ arch-core-testing = { group = "androidx.arch.core", name = "core-testing", versi
 coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines-test-version" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room-version" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room-version" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room-version" }
 
 [bundles]
 retrofit-deps = ["squareup-retrofit", "squareup-retrofit-converter", "okhttp-loggin-interceptor"]
