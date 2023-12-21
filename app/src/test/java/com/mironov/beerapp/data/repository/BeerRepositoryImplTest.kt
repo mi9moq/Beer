@@ -5,6 +5,7 @@ import com.mironov.beerapp.data.datasource.BeerLocalDataSource
 import com.mironov.beerapp.data.datasource.BeerRemoteDataSource
 import com.mironov.beerapp.data.mapper.BeerMapper
 import com.mironov.beerapp.data.network.api.BeerApi
+import com.mironov.beerapp.domain.entity.Result
 import com.mironov.beerapp.util.BeerData
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
@@ -51,7 +52,7 @@ class BeerRepositoryImplTest {
         whenever(mapper.mapDtoToDb(beerDto)) doReturn beerDbModel
         whenever(mapper.mapDbToEntity(beerDbModel)) doReturn beer
 
-        val expected = beerList
+        val expected = Result.Success(beer)
         val actual = repository.getList()
 
         assertEquals(expected, actual)
