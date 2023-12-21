@@ -21,4 +21,13 @@ class BeerMapperTest {
 
         assertEquals(expected, actual)
     }
+
+    @Test
+    fun `map db EXPECT entity`() {
+
+        val expected = entity
+        val actual = mapper.mapDbToEntity(db)
+
+        assertEquals(expected, actual)
+    }
 }
