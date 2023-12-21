@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("de.mannodermaus.android-junit5")
+
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -64,4 +66,6 @@ dependencies {
     implementation(libs.bundles.retrofit.deps)
     implementation(libs.bundles.coin.deps)
     testImplementation(libs.bundles.unit.tests.deps)
+    implementation (libs.room.runtime)
+    ksp (libs.room.compiler)
 }
