@@ -3,7 +3,7 @@ package com.mironov.beerapp.data.datasource
 import com.mironov.beerapp.data.network.api.BeerApi
 import com.mironov.beerapp.data.network.model.BeerDto
 
-interface BeerRemoteDatasource {
+interface BeerRemoteDataSource {
     suspend fun getList(): List<BeerDto>
 
     suspend fun getById(id: Long): BeerDto
@@ -11,9 +11,9 @@ interface BeerRemoteDatasource {
     suspend fun getRandom(): BeerDto
 }
 
-class BeerRemoteDatasourceImpl(
+class BeerRemoteDataSourceImpl(
     private val api: BeerApi,
-) : BeerRemoteDatasource {
+) : BeerRemoteDataSource {
     override suspend fun getList(): List<BeerDto> =
         api.getList()
 
