@@ -8,7 +8,7 @@ mokito-kotlin-version = "4.1.0"
 mokito-junit-version = "5.3.0"
 arch-core-testing-version = "2.2.0"
 coroutines-test-version = "1.7.0"
-room-version = "2.6.1"
+room-version = "2.5.0"
 
 [libraries]
 kotlin-android-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "kotlin-version" }

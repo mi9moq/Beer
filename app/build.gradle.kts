@@ -2,7 +2,6 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("de.mannodermaus.android-junit5")
-
     id("com.google.devtools.ksp")
 }
 
@@ -33,11 +32,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
@@ -67,5 +66,6 @@ dependencies {
     implementation(libs.bundles.coin.deps)
     testImplementation(libs.bundles.unit.tests.deps)
     implementation (libs.room.runtime)
-    ksp (libs.room.compiler)
+    annotationProcessor(libs.room.compiler)
+    ksp(libs.room.compiler)
 }
