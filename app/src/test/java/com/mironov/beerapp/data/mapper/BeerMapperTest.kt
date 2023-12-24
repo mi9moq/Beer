@@ -1,8 +1,8 @@
 package com.mironov.beerapp.data.mapper
 
 import com.mironov.beerapp.util.BeerData
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 
 class BeerMapperTest {
 
@@ -26,6 +26,15 @@ class BeerMapperTest {
 
         val expected = entity
         val actual = mapper.mapDbToEntity(db)
+
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun `map dto EXPECT entity`() {
+
+        val expected = entity
+        val actual = mapper.mapDtoToEntity(dto)
 
         assertEquals(expected, actual)
     }
