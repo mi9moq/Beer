@@ -8,7 +8,6 @@ import com.mironov.beerapp.domain.entity.ErrorType
 import com.mironov.beerapp.domain.entity.Result
 import com.mironov.beerapp.domain.repository.BeerRepository
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.withContext
 import java.net.ConnectException
 import java.net.SocketTimeoutException
@@ -20,18 +19,6 @@ class BeerRepositoryImpl(
     private val localDataSource: BeerLocalDataSource,
     private val remoteDataSource: BeerRemoteDataSource,
 ) : BeerRepository {
-
-    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
-        when (throwable) {
-            is UnknownHostException, is SocketTimeoutException, is ConnectException -> {
-                Result.Error(errorType = ErrorType.CONNECTION)
-            }
-
-            else -> {
-                Result.Error(errorType = ErrorType.UNKNOWN)
-            }
-        }
-    }
 
     override suspend fun getList(): Result<List<Beer>> =
         try {
@@ -54,11 +41,39 @@ class BeerRepositoryImpl(
             }
         }
 
-    override suspend fun getById(id: Long): Result<Beer> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getById(id: Long): Result<Beer> =
+        try {
+            withContext(dispatcher) {
+                val beer = remoteDataSource.getById(id = id).let(mapper::mapDtoToEntity)
+                return@withContext Result.Success(beer)
+            }
+        } catch (t: Throwable) {
+            when (t) {
+                is UnknownHostException, is SocketTimeoutException, is ConnectException -> {
+                    Result.Error(errorType = ErrorType.CONNECTION)
+                }
 
-    override suspend fun getRandom(): Result<Beer> {
-        TODO("Not yet implemented")
-    }
+                else -> {
+                    Result.Error(errorType = ErrorType.UNKNOWN)
+                }
+            }
+        }
+
+    override suspend fun getRandom(): Result<Beer> =
+        try {
+            withContext(dispatcher) {
+                val beer = remoteDataSource.getRandom().let(mapper::mapDtoToEntity)
+                return@withContext Result.Success(beer)
+            }
+        } catch (t: Throwable) {
+            when (t) {
+                is UnknownHostException, is SocketTimeoutException, is ConnectException -> {
+                    Result.Error(errorType = ErrorType.CONNECTION)
+                }
+
+                else -> {
+                    Result.Error(errorType = ErrorType.UNKNOWN)
+                }
+            }
+        }
 }
