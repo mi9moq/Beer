@@ -5,6 +5,7 @@ import com.mironov.beerapp.di.provideDataModule
 import com.mironov.beerapp.di.provideDatabaseModule
 import com.mironov.beerapp.di.provideDomainModule
 import com.mironov.beerapp.di.provideNetworkModule
+import com.mironov.beerapp.di.providePresentationModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -20,6 +21,7 @@ class BeerApp: Application() {
                 provideDomainModule(),
                 provideDatabaseModule(),
                 provideNetworkModule(),
+                providePresentationModule(),
             )
         }
     }
