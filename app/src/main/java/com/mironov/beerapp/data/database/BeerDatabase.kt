@@ -2,7 +2,6 @@ package com.mironov.beerapp.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverter
 import androidx.room.TypeConverters
 import com.mironov.beerapp.data.database.converter.StringCollectionConverter
 import com.mironov.beerapp.data.database.model.BeerDbModel
