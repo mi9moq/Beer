@@ -18,7 +18,7 @@ class BeerRemoteDataSourceImpl(
         api.getList()
 
     override suspend fun getById(id: Long): BeerDto =
-        api.getById(id = id)
+        api.getById(id = id).first()
 
     override suspend fun getRandom(): BeerDto =
         api.getRandom()
