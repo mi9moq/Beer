@@ -9,15 +9,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class RandomViewModel(
-    private val getRandomBeerUseCase: GetRandomBeerUseCase
+    private val getRandomBeerUseCase: GetRandomBeerUseCase,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<RandomScreenState>(RandomScreenState.Initial)
     val state = _state.asStateFlow()
-
-    init {
-        getRandomBeer()
-    }
 
     fun getRandomBeer() {
 
