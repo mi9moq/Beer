@@ -12,7 +12,7 @@ interface BeerApi {
     @GET("beers/{id}")
     suspend fun getById(
         @Path("id") id: Long,
-    ): BeerDto
+    ): List<BeerDto>
 
     @GET("beers/random")
     suspend fun getRandom(): BeerDto

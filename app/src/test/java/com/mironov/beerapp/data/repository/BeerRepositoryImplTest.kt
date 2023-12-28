@@ -54,7 +54,6 @@ class BeerRepositoryImplTest {
     private val connectionError = BeerData.connectionError
 
     @Test
-    @Suppress("ktlint:standard:max-line-length")
     fun `get EXPECT beer list`() = runTest(dispatcher) {
         whenever(remoteDataSource.getList()) doReturn beerListDto
         whenever(localDataSource.getList()) doReturn beerListDbModel
@@ -68,7 +67,6 @@ class BeerRepositoryImplTest {
     }
 
     @Test
-    @Suppress("ktlint:standard:max-line-length")
     fun `get list EXPECT insert in DB`() = runTest(dispatcher) {
         whenever(remoteDataSource.getList()) doReturn beerListDto
         whenever(mapper.mapDtoToDb(beerDto)) doReturn beerDbModel
@@ -79,7 +77,6 @@ class BeerRepositoryImplTest {
     }
 
     @ParameterizedTest
-    @Suppress("ktlint:standard:max-line-length")
     @MethodSource("connectionError")
     fun `get with Internet exception EXPECT connection error type`(e: Exception) =
         runTest(dispatcher) {
@@ -92,7 +89,6 @@ class BeerRepositoryImplTest {
         }
 
     @Test
-    @Suppress("ktlint:standard:max-line-length")
     fun `get with unknown exception EXPECT error type UNKNOWN`() = runTest(dispatcher) {
         whenever(remoteDataSource.getList()) doAnswer { throw Exception() }
 
@@ -103,7 +99,6 @@ class BeerRepositoryImplTest {
     }
 
     @Test
-    @Suppress("ktlint:standard:max-line-length")
     fun `get random EXPECT beer`() = runTest(dispatcher) {
         whenever(remoteDataSource.getRandom()) doReturn beerDto
         whenever(mapper.mapDtoToEntity(beerDto)) doReturn beer
@@ -115,7 +110,6 @@ class BeerRepositoryImplTest {
     }
 
     @ParameterizedTest
-    @Suppress("ktlint:standard:max-line-length")
     @MethodSource("connectionError")
     fun `get random with Internet exception EXPECT connection error type`(e: Exception) =
         runTest(dispatcher) {
@@ -128,7 +122,6 @@ class BeerRepositoryImplTest {
         }
 
     @Test
-    @Suppress("ktlint:standard:max-line-length")
     fun `get random with unknown exception EXPECT error type UNKNOWN`() = runTest(dispatcher) {
         whenever(remoteDataSource.getRandom()) doAnswer { throw Exception() }
 
@@ -139,7 +132,6 @@ class BeerRepositoryImplTest {
     }
 
     @Test
-    @Suppress("ktlint:standard:max-line-length")
     fun `get by id EXPECT beer`() = runTest(dispatcher) {
         whenever(remoteDataSource.getById(id = 1L)) doReturn beerDto
         whenever(mapper.mapDtoToEntity(beerDto)) doReturn beer
@@ -151,7 +143,6 @@ class BeerRepositoryImplTest {
     }
 
     @ParameterizedTest
-    @Suppress("ktlint:standard:max-line-length")
     @MethodSource("connectionError")
     fun `get by id with Internet exception EXPECT connection error type`(e: Exception) =
         runTest(dispatcher) {
@@ -164,7 +155,6 @@ class BeerRepositoryImplTest {
         }
 
     @Test
-    @Suppress("ktlint:standard:max-line-length")
     fun `get by id with unknown exception EXPECT error type UNKNOWN`() = runTest(dispatcher) {
         whenever(remoteDataSource.getById(id = 1L)) doAnswer { throw Exception() }
 

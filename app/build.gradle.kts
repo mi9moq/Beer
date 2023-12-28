@@ -67,6 +67,7 @@ dependencies {
     testImplementation(libs.bundles.unit.tests.deps)
     implementation (libs.room.runtime)
     implementation (libs.room.ktx)
+    implementation (libs.bundles.coroutines.deps)
     annotationProcessor(libs.room.compiler)
     ksp(libs.room.compiler)
 }

@@ -29,7 +29,7 @@ class BeerRemoteDataSourceImplTest {
 
     @Test
     fun `getById EXPECT beer`() = runTest {
-        whenever(api.getById(id)) doReturn dto
+        whenever(api.getById(id)) doReturn listOf(dto)
 
         val expect = dto
         val actual = dataSource.getById(id)

@@ -14,7 +14,7 @@ object StringCollectionConverter {
 
     @TypeConverter
     fun from(value: String): List<String> {
-        val typeToken = object : TypeToken<Set<String>>() {}.type
+        val typeToken = object : TypeToken<List<String>>() {}.type
         return gson.fromJson(value, typeToken)
     }
 }
