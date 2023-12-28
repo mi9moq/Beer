@@ -12,9 +12,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.mironov.beerapp.domain.entity.Beer
 
 @Composable
-fun BeerCard() {
+fun BeerCard(
+    beer: Beer,
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -27,7 +30,7 @@ fun BeerCard() {
             AsyncImage(
                 modifier = Modifier
                     .padding(8.dp),
-                model = "https://images.punkapi.com/v2/2.png",
+                model = beer.imageUrl,
                 contentDescription = null,
                 alignment = Alignment.CenterStart,
             )
@@ -37,7 +40,7 @@ fun BeerCard() {
                     .fillMaxWidth()
                     .wrapContentHeight()
                     .padding(8.dp),
-                text = "description",
+                text = beer.description,
                 textAlign = TextAlign.Center,
             )
         }
