@@ -26,6 +26,7 @@ class BeersViewModelTest {
 
     private val unknownError = BeerData.unknownError
     private val beerListSuccess = BeerData.beerListSuccess
+    private val connectionError = BeerData.connectionError
 
     @BeforeEach
     fun setup() {
@@ -53,7 +54,7 @@ class BeersViewModelTest {
     }
 
     @Test
-    fun `getList return unknown error EXPECT Error state`() = runTest {
+    fun `getList return unknown error EXPECT Unknown Error state`() = runTest {
         whenever(getBeerListUseCase()) doSuspendableAnswer {
             delay(1L)
             unknownError
@@ -64,6 +65,21 @@ class BeersViewModelTest {
             assertEquals(BeersScreenState.Initial, awaitItem())
             assertEquals(BeersScreenState.Loading, awaitItem())
             assertEquals(BeersScreenState.Error(ErrorType.UNKNOWN), awaitItem())
+        }
+    }
+
+    @Test
+    fun `getList EXPECT Connection Error state`() = runTest {
+        whenever(getBeerListUseCase()) doSuspendableAnswer {
+            delay(1L)
+            connectionError
+        }
+
+        viewModel.state.test {
+            viewModel.getList()
+            assertEquals(BeersScreenState.Initial, awaitItem())
+            assertEquals(BeersScreenState.Loading, awaitItem())
+            assertEquals(BeersScreenState.Error(ErrorType.CONNECTION), awaitItem())
         }
     }
 }
