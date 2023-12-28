@@ -1,17 +1,19 @@
 package com.mironov.beerapp.presentation
 
+import app.cash.turbine.test
 import com.mironov.beerapp.domain.entity.ErrorType
 import com.mironov.beerapp.domain.usecase.GetBeerListUseCase
 import com.mironov.beerapp.presentation.main.BeersScreenState
 import com.mironov.beerapp.presentation.main.BeersViewModel
 import com.mironov.beerapp.util.BeerData
-import com.mironov.beerapp.util.BeerData.unknownError
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.doSuspendableAnswer
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 import kotlin.test.assertEquals
@@ -22,6 +24,14 @@ class BeersViewModelTest {
     private val getBeerListUseCase: GetBeerListUseCase = mock()
     private val viewModel: BeersViewModel = BeersViewModel(getBeerListUseCase)
 
+    private val unknownError = BeerData.unknownError
+    private val beerListSuccess = BeerData.beerListSuccess
+
+    @BeforeEach
+    fun setup() {
+        Dispatchers.setMain(Dispatchers.Unconfined)
+    }
+
     @Test
     fun `view model created EXPECT Initial state`() = runTest {
         assertEquals(BeersScreenState.Initial, viewModel.state.value)
@@ -29,26 +39,31 @@ class BeersViewModelTest {
 
     @Test
     fun `get beer EXPECT content state`() = runTest {
-        Dispatchers.setMain(Dispatchers.Unconfined)
-        whenever(getBeerListUseCase()) doReturn BeerData.beerListSuccess
-        viewModel.getList()
+        whenever(getBeerListUseCase()) doSuspendableAnswer {
+            delay(1L)
+            beerListSuccess
+        }
 
-        val expected = BeersScreenState.Content(BeerData.beerListSuccess.data)
-        val actual = viewModel.state.value
-
-        assertEquals(expected, actual)
+        viewModel.state.test {
+            viewModel.getList()
+            assertEquals(BeersScreenState.Initial, awaitItem())
+            assertEquals(BeersScreenState.Loading, awaitItem())
+            assertEquals(BeersScreenState.Content(beerListSuccess.data), awaitItem())
+        }
     }
 
     @Test
     fun `getList return unknown error EXPECT Error state`() = runTest {
-        Dispatchers.setMain(Dispatchers.Unconfined)
-        whenever(getBeerListUseCase()) doReturn unknownError
+        whenever(getBeerListUseCase()) doSuspendableAnswer {
+            delay(1L)
+            unknownError
+        }
 
-        viewModel.getList()
-
-        val expected = BeersScreenState.Error(errorType = ErrorType.UNKNOWN)
-        val actual = viewModel.state.value
-
-        assertEquals(expected, actual)
+        viewModel.state.test {
+            viewModel.getList()
+            assertEquals(BeersScreenState.Initial, awaitItem())
+            assertEquals(BeersScreenState.Loading, awaitItem())
+            assertEquals(BeersScreenState.Error(ErrorType.UNKNOWN), awaitItem())
+        }
     }
 }
