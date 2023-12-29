@@ -1,6 +1,6 @@
 [versions]
 kotlin-version = "1.9.0"
-coin-version = "3.5.3"
+koin-version = "3.5.3"
 retrofit-version = "2.9.0"
 interceptor-version = "4.11.0"
 junit-version = "5.9.2"
@@ -15,9 +15,10 @@ turbine-version = "1.0.0"
 [libraries]
 kotlin-android-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "kotlin-version" }
 
-koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "coin-version" }
-koin = { group = "io.insert-koin", name = "koin-core", version.ref = "coin-version" }
-koin-test = { group = "io.insert-koin", name = "koin-test", version.ref = "coin-version" }
+koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin-version" }
+koin = { group = "io.insert-koin", name = "koin-core", version.ref = "koin-version" }
+koin-test = { group = "io.insert-koin", name = "koin-test", version.ref = "koin-version" }
+koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin-version" }
 
 squareup-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit-version" }
 squareup-retrofit-converter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit-version" }
@@ -40,5 +41,5 @@ room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room-ver
 [bundles]
 retrofit-deps = ["squareup-retrofit", "squareup-retrofit-converter", "okhttp-loggin-interceptor"]
 unit-tests-deps = ["junit-api", "junit-params", "junit-engine", "mockito-kotlin", "mockito-junit", "arch-core-testing", "coroutines-test", "koin-test", "turbine"]
-coin-deps = ["koin", "koin-android"]
+coin-deps = ["koin", "koin-android", "koin-compose"]
 coroutines-deps = ["coroutines-core", "coroutines-android"]
