@@ -6,13 +6,19 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.mironov.beerapp.R
 import com.mironov.beerapp.domain.entity.Beer
 import com.mironov.beerapp.domain.entity.ErrorType.CONNECTION
 import com.mironov.beerapp.domain.entity.ErrorType.UNKNOWN
@@ -33,12 +39,34 @@ fun BeersScreen() {
 
     Scaffold(
         bottomBar = {
+            NavigationBar {
+                NavigationBarItem(
+                    selected = true,
+                    onClick = { },
+                    icon = {
+                        Icon(painterResource(R.drawable.ic_beers), contentDescription = null)
+                    },
+                    label = {
+                        Text(text = "Пивы")
+                    },
+                )
 
+                NavigationBarItem(
+                    selected = false,
+                    onClick = { },
+                    icon = {
+                        Icon(painterResource(R.drawable.ic_random), contentDescription = null)
+                    },
+                    label = {
+                        Text(text = "Случайное пево")
+                    },
+                )
+            }
         }
-    ) { paddingValues ->
-        println(paddingValues)
-
-        BeersScreenContent(screenState = screenState)
+    ) { padding ->
+        Box(modifier = Modifier.padding(padding)) {
+            BeersScreenContent(screenState = screenState)
+        }
     }
 }
 
