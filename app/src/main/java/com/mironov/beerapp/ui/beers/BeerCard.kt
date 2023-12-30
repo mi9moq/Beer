@@ -24,6 +24,15 @@ fun BeerCard(
             .wrapContentHeight()
             .padding(8.dp),
     ) {
+        Text(
+            modifier = Modifier
+                .padding(horizontal = 8.dp)
+                .padding(top = 8.dp)
+                .fillMaxWidth(),
+            text = beer.name,
+            textAlign = TextAlign.Center,
+        )
+
         Row(
             verticalAlignment = Alignment.CenterVertically,
         ) {
