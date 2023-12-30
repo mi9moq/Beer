@@ -61,7 +61,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
-
+    implementation (libs.coil.compose)
     implementation(libs.bundles.retrofit.deps)
     implementation(libs.bundles.coin.deps)
     testImplementation(libs.bundles.unit.tests.deps)
@@ -70,4 +70,5 @@ dependencies {
     implementation (libs.bundles.coroutines.deps)
     annotationProcessor(libs.room.compiler)
     ksp(libs.room.compiler)
+    implementation("io.insert-koin:koin-androidx-compose:3.5.3")
 }
