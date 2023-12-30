@@ -11,6 +11,7 @@ coroutines-test-version = "1.7.0"
 coroutines-version = "1.7.0"
 room-version = "2.5.0"
 turbine-version = "1.0.0"
+coil-version = "2.1.0"
 
 [libraries]
 kotlin-android-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "kotlin-version" }
@@ -36,6 +37,7 @@ coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutin
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room-version" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room-version" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room-version" }
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil-version" }
 
 [bundles]
 retrofit-deps = ["squareup-retrofit", "squareup-retrofit-converter", "okhttp-loggin-interceptor"]
