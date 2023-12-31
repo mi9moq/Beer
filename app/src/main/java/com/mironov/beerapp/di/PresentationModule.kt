@@ -16,4 +16,5 @@ fun providePresentationModule(): Module =
             RandomViewModel(getRandomBeerUseCase = get())
         }
         viewModelOf(::BeersViewModel)
+        viewModelOf(::BeerInfoViewModel)
     }
