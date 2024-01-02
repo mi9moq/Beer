@@ -22,15 +22,20 @@ fun RandomScreen() {
     when (val currentState = screenState.value) {
         Initial -> Unit
         Loading -> {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                CircularProgressIndicator()
-            }
+            LoadingState()
         }
 
         is Content -> TODO()
         is Error -> TODO()
+    }
+}
+
+@Composable
+private fun LoadingState() {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        CircularProgressIndicator()
     }
 }
