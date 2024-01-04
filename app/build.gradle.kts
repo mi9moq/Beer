@@ -70,4 +70,5 @@ dependencies {
     implementation (libs.bundles.coroutines.deps)
     annotationProcessor(libs.room.compiler)
     ksp(libs.room.compiler)
+    implementation(libs.coil.compose)
 }
