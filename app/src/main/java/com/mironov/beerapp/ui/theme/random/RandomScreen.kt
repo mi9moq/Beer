@@ -28,6 +28,7 @@ import com.mironov.beerapp.presentation.random.RandomScreenState.Error
 import com.mironov.beerapp.presentation.random.RandomScreenState.Initial
 import com.mironov.beerapp.presentation.random.RandomScreenState.Loading
 import com.mironov.beerapp.presentation.random.RandomViewModel
+import com.mironov.beerapp.ui.theme.utils.ErrorState
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -42,7 +43,9 @@ fun RandomScreen() {
         }
 
         is Content -> ContentState(beer = currentState.content)
-        is Error -> TODO()
+        is Error -> ErrorState(errorType = currentState.errorType) {
+            viewModel.getRandomBeer()
+        }
     }
 }
 
