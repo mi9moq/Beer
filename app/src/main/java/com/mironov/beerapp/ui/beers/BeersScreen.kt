@@ -20,14 +20,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.mironov.beerapp.R
 import com.mironov.beerapp.domain.entity.Beer
-import com.mironov.beerapp.domain.entity.ErrorType.CONNECTION
-import com.mironov.beerapp.domain.entity.ErrorType.UNKNOWN
 import com.mironov.beerapp.presentation.main.BeersScreenState
 import com.mironov.beerapp.presentation.main.BeersScreenState.Content
 import com.mironov.beerapp.presentation.main.BeersScreenState.Error
 import com.mironov.beerapp.presentation.main.BeersScreenState.Initial
 import com.mironov.beerapp.presentation.main.BeersScreenState.Loading
 import com.mironov.beerapp.presentation.main.BeersViewModel
+import com.mironov.beerapp.ui.utils.ErrorState
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -65,7 +64,12 @@ fun BeersScreen() {
         }
     ) { padding ->
         Box(modifier = Modifier.padding(padding)) {
-            BeersScreenContent(screenState = screenState)
+            BeersScreenContent(
+                screenState = screenState,
+                tryingAgain = {
+                    viewModel.getList()
+                }
+            )
         }
     }
 }
@@ -73,6 +77,7 @@ fun BeersScreen() {
 @Composable
 private fun BeersScreenContent(
     screenState: State<BeersScreenState>,
+    tryingAgain: () -> Unit,
 ) {
     when (val currentState = screenState.value) {
 
@@ -82,11 +87,8 @@ private fun BeersScreenContent(
 
         is Content -> ContentState(content = currentState.content)
 
-        is Error -> {
-            when (currentState.errorType) {
-                CONNECTION -> TODO()
-                UNKNOWN -> TODO()
-            }
+        is Error -> ErrorState(errorType = currentState.errorType) {
+            tryingAgain()
         }
     }
 }
