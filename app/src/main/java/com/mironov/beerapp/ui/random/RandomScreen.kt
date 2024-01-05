@@ -1,4 +1,4 @@
-package com.mironov.beerapp.ui.theme.random
+package com.mironov.beerapp.ui.random
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -28,7 +28,7 @@ import com.mironov.beerapp.presentation.random.RandomScreenState.Error
 import com.mironov.beerapp.presentation.random.RandomScreenState.Initial
 import com.mironov.beerapp.presentation.random.RandomScreenState.Loading
 import com.mironov.beerapp.presentation.random.RandomViewModel
-import com.mironov.beerapp.ui.theme.utils.ErrorState
+import com.mironov.beerapp.ui.utils.ErrorState
 import org.koin.androidx.compose.koinViewModel
 
 @Composable

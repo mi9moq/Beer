@@ -1,4 +1,4 @@
-package com.mironov.beerapp.ui.theme.utils
+package com.mironov.beerapp.ui.utils
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
