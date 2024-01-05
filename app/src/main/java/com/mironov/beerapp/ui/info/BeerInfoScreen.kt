@@ -24,14 +24,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.mironov.beerapp.domain.entity.Beer
-import com.mironov.beerapp.domain.entity.ErrorType.CONNECTION
-import com.mironov.beerapp.domain.entity.ErrorType.UNKNOWN
 import com.mironov.beerapp.presentation.info.BeerInfoScreenState
 import com.mironov.beerapp.presentation.info.BeerInfoScreenState.Content
 import com.mironov.beerapp.presentation.info.BeerInfoScreenState.Error
 import com.mironov.beerapp.presentation.info.BeerInfoScreenState.Initial
 import com.mironov.beerapp.presentation.info.BeerInfoScreenState.Loading
 import com.mironov.beerapp.presentation.info.BeerInfoViewModel
+import com.mironov.beerapp.ui.utils.ErrorState
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -46,13 +45,19 @@ fun BeerInfoScreen(
         modifier = Modifier
             .fillMaxSize(),
     ) {
-        BeersScreenContent(screenState = screenState)
+        BeersScreenContent(
+            screenState = screenState,
+            tryingAgain = {
+                viewModel.getById(id = id)
+            }
+        )
     }
 }
 
 @Composable
 private fun BeersScreenContent(
     screenState: State<BeerInfoScreenState>,
+    tryingAgain: () -> Unit,
 ) {
     when (val currentState = screenState.value) {
 
@@ -62,11 +67,8 @@ private fun BeersScreenContent(
 
         is Content -> ContentState(beer = currentState.content)
 
-        is Error -> {
-            when (currentState.errorType) {
-                CONNECTION -> TODO()
-                UNKNOWN -> TODO()
-            }
+        is Error -> ErrorState(errorType = currentState.errorType) {
+            tryingAgain()
         }
     }
 }
@@ -130,7 +132,7 @@ private fun ContentState(
         }
 
         Spacer(modifier = Modifier.height(16.dp))
-        
+
         Row(
             modifier = Modifier
                 .fillMaxWidth(),
@@ -163,7 +165,7 @@ private fun ContentState(
         }
 
         Spacer(modifier = Modifier.height(16.dp))
-        
+
         Text(
             modifier = Modifier
                 .fillMaxWidth(),
