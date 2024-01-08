@@ -15,10 +15,6 @@ class RandomViewModel(
     private val _state = MutableStateFlow<RandomScreenState>(RandomScreenState.Initial)
     val state = _state.asStateFlow()
 
-    init {
-        getRandomBeer()
-    }
-
     fun getRandomBeer() {
 
         viewModelScope.launch {
