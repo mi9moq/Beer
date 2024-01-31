@@ -12,16 +12,19 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.mironov.beerapp.R
 import com.mironov.beerapp.domain.entity.Beer
 import com.mironov.beerapp.presentation.random.RandomScreenState.Content
 import com.mironov.beerapp.presentation.random.RandomScreenState.Error
@@ -32,20 +35,31 @@ import com.mironov.beerapp.ui.utils.ErrorState
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun RandomScreen() {
+fun RandomScreen(
+    modifier: Modifier
+) {
     val viewModel = koinViewModel<RandomViewModel>()
     val screenState = viewModel.state.collectAsState()
 
     when (val currentState = screenState.value) {
-        Initial -> Unit
+        Initial -> {
+            viewModel.getRandomBeer()
+        }
+
         Loading -> {
             LoadingState()
         }
 
-        is Content -> ContentState(beer = currentState.content)
-        is Error -> ErrorState(errorType = currentState.errorType) {
-            viewModel.getRandomBeer()
-        }
+        is Content -> ContentState(
+            modifier = modifier,
+            beer = currentState.content,
+            nextBeer = viewModel::getRandomBeer
+        )
+
+        is Error -> ErrorState(
+            errorType = currentState.errorType,
+            tryAgain = viewModel::getRandomBeer
+        )
     }
 }
 
@@ -61,11 +75,32 @@ private fun LoadingState() {
 
 @Composable
 private fun ContentState(
+    modifier: Modifier,
     beer: Beer,
+    nextBeer: () -> Unit,
 ) {
     Column(
-        modifier = Modifier
-            .verticalScroll(rememberScrollState()) //TODO() Возможно лучше переделать на LazyColumn
+        modifier = modifier.fillMaxSize()
+    ) {
+        BeerInfo(beer = beer, Modifier.weight(1f))
+
+        Button(
+            onClick = { nextBeer() },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+                .height(44.dp),
+        ) {
+            Text(text = stringResource(id = R.string.another))
+        }
+    }
+}
+
+@Composable
+fun BeerInfo(beer: Beer, modifier: Modifier) {
+    Column(
+        modifier = modifier
+            .verticalScroll(rememberScrollState())
             .fillMaxSize()
             .padding(8.dp),
     ) {
