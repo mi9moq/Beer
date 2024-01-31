@@ -1,7 +1,6 @@
 package com.mironov.beerapp.ui.random
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,7 +12,6 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -32,6 +30,7 @@ import com.mironov.beerapp.presentation.random.RandomScreenState.Initial
 import com.mironov.beerapp.presentation.random.RandomScreenState.Loading
 import com.mironov.beerapp.presentation.random.RandomViewModel
 import com.mironov.beerapp.ui.utils.ErrorState
+import com.mironov.beerapp.ui.utils.LoadingState
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -60,16 +59,6 @@ fun RandomScreen(
             errorType = currentState.errorType,
             tryAgain = viewModel::getRandomBeer
         )
-    }
-}
-
-@Composable
-private fun LoadingState() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        CircularProgressIndicator()
     }
 }
 

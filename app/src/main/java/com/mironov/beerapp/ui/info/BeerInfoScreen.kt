@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -31,6 +30,7 @@ import com.mironov.beerapp.presentation.info.BeerInfoScreenState.Initial
 import com.mironov.beerapp.presentation.info.BeerInfoScreenState.Loading
 import com.mironov.beerapp.presentation.info.BeerInfoViewModel
 import com.mironov.beerapp.ui.utils.ErrorState
+import com.mironov.beerapp.ui.utils.LoadingState
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -70,18 +70,6 @@ private fun BeersScreenContent(
         is Error -> ErrorState(errorType = currentState.errorType) {
             tryingAgain()
         }
-    }
-}
-
-@Composable
-private fun LoadingState() {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        contentAlignment = Alignment.Center,
-    ) {
-        CircularProgressIndicator()
     }
 }
 
