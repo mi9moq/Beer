@@ -18,10 +18,12 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.mironov.beerapp.R
 import com.mironov.beerapp.domain.entity.Beer
 import com.mironov.beerapp.presentation.info.BeerInfoScreenState
 import com.mironov.beerapp.presentation.info.BeerInfoScreenState.Content
@@ -77,96 +79,147 @@ private fun BeersScreenContent(
 private fun ContentState(
     beer: Beer,
 ) {
+    BeerInfo(beer = beer, modifier = Modifier)
+}
+
+
+@Composable
+fun BeerInfo(beer: Beer, modifier: Modifier) {
     Column(
-        modifier = Modifier
-            .verticalScroll(rememberScrollState()) //TODO() Возможно лучше переделать на LazyColumn
+        modifier = modifier
+            .verticalScroll(rememberScrollState())
             .fillMaxSize()
             .padding(8.dp),
     ) {
-        Text(
-            modifier = Modifier
-                .fillMaxWidth(),
-            text = beer.name,
-            textAlign = TextAlign.Center,
+
+        BeerHeader(
+            name = beer.name,
+            tagline = beer.tagline
         )
 
-        Text(
-            modifier = Modifier
-                .fillMaxWidth(),
-            text = beer.tagline,
-            textAlign = TextAlign.Center,
-            fontStyle = FontStyle.Italic,
+        BeerDescription(
+            imageUrl = beer.imageUrl,
+            description = beer.description
         )
-
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            AsyncImage(
-                modifier = Modifier
-                    .padding(8.dp),
-                model = beer.imageUrl,
-                contentDescription = null,
-                alignment = Alignment.CenterStart,
-            )
-
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .padding(8.dp),
-                text = beer.description,
-                textAlign = TextAlign.Center,
-            )
-        }
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Row(
-            modifier = Modifier
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-        ) {
-            Text(
-                text = "ABV\n${beer.abv}%",
-                textAlign = TextAlign.Center,
-            )
-
-            Text(
-                text = "IBU\n${beer.ibu}",
-                textAlign = TextAlign.Center,
-            )
-
-            Text(
-                text = "EBC\n${beer.ebc}",
-                textAlign = TextAlign.Center,
-            )
-
-            Text(
-                text = "SRM\n${beer.srm}",
-                textAlign = TextAlign.Center,
-            )
-
-            Text(
-                text = "PH\n${beer.ph}",
-                textAlign = TextAlign.Center,
-            )
-        }
+        BeerCharacteristics(
+            abv = beer.abv,
+            ibu = beer.ibu,
+            ebc = beer.ebc,
+            srm = beer.srm,
+            ph = beer.ph
+        )
 
         Spacer(modifier = Modifier.height(16.dp))
 
+        FoodParing(foodPairing = beer.foodPairing)
+    }
+}
+
+@Composable
+private fun BeerHeader(
+    name: String,
+    tagline: String
+) {
+    Text(
+        modifier = Modifier
+            .fillMaxWidth(),
+        text = name,
+        textAlign = TextAlign.Center,
+    )
+
+    Text(
+        modifier = Modifier
+            .fillMaxWidth(),
+        text = tagline,
+        textAlign = TextAlign.Center,
+        fontStyle = FontStyle.Italic,
+    )
+}
+
+@Composable
+private fun BeerDescription(
+    imageUrl: String,
+    description: String
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        AsyncImage(
+            modifier = Modifier
+                .padding(8.dp),
+            model = imageUrl,
+            contentDescription = null,
+            alignment = Alignment.CenterStart,
+        )
+
         Text(
             modifier = Modifier
-                .fillMaxWidth(),
-            text = "Best with:",
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(8.dp),
+            text = description,
+            textAlign = TextAlign.Center,
+        )
+    }
+}
+
+@Composable
+private fun BeerCharacteristics(
+    abv: Float,
+    ibu: Float,
+    ebc: Float,
+    srm: Float,
+    ph: Float,
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+    ) {
+        Text(
+            text = "ABV\n${abv}%",
             textAlign = TextAlign.Center,
         )
 
-        beer.foodPairing.forEach {
-            Text(
-                modifier = Modifier
-                    .padding(top = 8.dp),
-                text = it,
-            )
-        }
+        Text(
+            text = "IBU\n${ibu}",
+            textAlign = TextAlign.Center,
+        )
+
+        Text(
+            text = "EBC\n${ebc}",
+            textAlign = TextAlign.Center,
+        )
+
+        Text(
+            text = "SRM\n${srm}",
+            textAlign = TextAlign.Center,
+        )
+
+        Text(
+            text = "PH\n${ph}",
+            textAlign = TextAlign.Center,
+        )
+    }
+}
+
+@Composable
+private fun FoodParing(foodPairing: List<String>) {
+    Text(
+        modifier = Modifier
+            .fillMaxWidth(),
+        text = stringResource(R.string.best_with),
+        textAlign = TextAlign.Center,
+    )
+
+    foodPairing.forEach {
+        Text(
+            modifier = Modifier
+                .padding(top = 8.dp),
+            text = it,
+        )
     }
 }
