@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -22,6 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.mironov.beerapp.R
 import com.mironov.beerapp.domain.entity.Beer
@@ -128,6 +130,7 @@ private fun BeerHeader(
             .fillMaxWidth(),
         text = name,
         textAlign = TextAlign.Center,
+        style = MaterialTheme.typography.titleMedium.copy(fontSize = 24.sp)
     )
 
     Text(
@@ -136,6 +139,7 @@ private fun BeerHeader(
         text = tagline,
         textAlign = TextAlign.Center,
         fontStyle = FontStyle.Italic,
+        style = MaterialTheme.typography.labelLarge
     )
 }
 
