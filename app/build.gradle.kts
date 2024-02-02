@@ -70,6 +70,5 @@ dependencies {
     implementation (libs.bundles.coroutines.deps)
     annotationProcessor(libs.room.compiler)
     ksp(libs.room.compiler)
-    implementation("io.insert-koin:koin-androidx-compose:3.5.3")
-    implementation ("androidx.navigation:navigation-compose:2.5.2")
+    implementation (libs.navigation.compose)
 }
