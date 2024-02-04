@@ -15,5 +15,5 @@ interface BeerApi {
     ): List<BeerDto>
 
     @GET("beers/random")
-    suspend fun getRandom(): BeerDto
+    suspend fun getRandom(): List<BeerDto>
 }
