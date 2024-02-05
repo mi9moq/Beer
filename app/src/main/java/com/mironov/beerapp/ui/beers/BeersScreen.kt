@@ -22,8 +22,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.mironov.beerapp.R
 import com.mironov.beerapp.domain.entity.Beer
-import com.mironov.beerapp.domain.entity.ErrorType.CONNECTION
-import com.mironov.beerapp.domain.entity.ErrorType.UNKNOWN
 import com.mironov.beerapp.navigation.AppNavGraph
 import com.mironov.beerapp.navigation.Screen
 import com.mironov.beerapp.navigation.rememberNavigationState
@@ -89,6 +87,9 @@ fun BeersScreen() {
                         screenState = screenState,
                         onBeerClickListener = {
                             navigationState.navigateToInfo(it)
+                        },
+                        tryingAgain = {
+                            viewModel.getList()
                         }
                     )
                 }
