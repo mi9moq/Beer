@@ -34,6 +34,7 @@ import com.mironov.beerapp.presentation.main.BeersScreenState.Initial
 import com.mironov.beerapp.presentation.main.BeersScreenState.Loading
 import com.mironov.beerapp.presentation.main.BeersViewModel
 import com.mironov.beerapp.ui.info.BeerInfoScreen
+import com.mironov.beerapp.ui.utils.ErrorState
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -108,6 +109,7 @@ fun BeersScreen() {
 private fun BeersScreenContent(
     screenState: State<BeersScreenState>,
     onBeerClickListener: (Long) -> Unit,
+    tryingAgain: () -> Unit,
 ) {
     when (val currentState = screenState.value) {
 
@@ -120,11 +122,8 @@ private fun BeersScreenContent(
             onBeerClickListener = onBeerClickListener
         )
 
-        is Error -> {
-            when (currentState.errorType) {
-                CONNECTION -> TODO()
-                UNKNOWN -> TODO()
-            }
+        is Error -> ErrorState(errorType = currentState.errorType) {
+            tryingAgain()
         }
     }
 }

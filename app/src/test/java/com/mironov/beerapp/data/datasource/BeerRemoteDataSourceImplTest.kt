@@ -39,7 +39,7 @@ class BeerRemoteDataSourceImplTest {
 
     @Test
     fun `getRandom EXPECT beer`() = runTest {
-        whenever(api.getRandom()) doReturn dto
+        whenever(api.getRandom()) doReturn listOf(dto)
 
         val expect = dto
         val actual = dataSource.getRandom()

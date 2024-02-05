@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">BeerApp</string>
+    <string name="unknown_error_message">Unknown error</string>
+    <string name="connection_error_message">Connection error, please check your internet connection</string>
+    <string name="try_again">try again</string>
+    <string name="another">another</string>
+    <string name="best_with">Best with:</string>
 </resources>
