@@ -32,6 +32,7 @@ import com.mironov.beerapp.presentation.main.BeersScreenState.Initial
 import com.mironov.beerapp.presentation.main.BeersScreenState.Loading
 import com.mironov.beerapp.presentation.main.BeersViewModel
 import com.mironov.beerapp.ui.info.BeerInfoScreen
+import com.mironov.beerapp.ui.random.RandomScreen
 import com.mironov.beerapp.ui.utils.ErrorState
 import org.koin.androidx.compose.koinViewModel
 
@@ -100,7 +101,7 @@ fun BeersScreen() {
                 }
             },
             randomScreenContent = {
-                Text(text = "Рандомное пиво")
+                RandomScreen(modifier = Modifier.padding(padding))
             },
         )
     }
