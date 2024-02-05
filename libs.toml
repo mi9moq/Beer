@@ -12,10 +12,10 @@ coroutines-version = "1.7.0"
 room-version = "2.5.0"
 turbine-version = "1.0.0"
 coil-version = "2.1.0"
+navigation-compose-version = "2.5.2"
 
 [libraries]
 kotlin-android-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "kotlin-version" }
-
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin-version" }
 koin = { group = "io.insert-koin", name = "koin-core", version.ref = "koin-version" }
 koin-test = { group = "io.insert-koin", name = "koin-test", version.ref = "koin-version" }
@@ -39,6 +39,7 @@ room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room-version" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room-version" }
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil-version" }
+navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation-compose-version" }
 
 [bundles]
 retrofit-deps = ["squareup-retrofit", "squareup-retrofit-converter", "okhttp-loggin-interceptor"]
